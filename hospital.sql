@@ -34,24 +34,6 @@ CREATE TABLE Patient(
   CONSTRAINT pk_Patient primary key (patientSSN)
 );
 
-DROP TABLE IF EXISTS Prescription;
-CREATE TABLE Prescription(
-  prescriptionID char(10) not null, 
-  drugName varchar(25) not null,
-  dosage int not null,
-  noRefills int not null,
-  datePrescribed date not null,
-  mostRecentFiling date,
-  prescribedBy char(10) not null, 
-  patientSSN char(9) not null,
-  
-  CONSTRAINT pk_Prescription primary key (prescriptionID),
-  CONSTRAINT fk_PrescribedBy foreign key (prescribedBy) references Doctor(doctorID),
-  CONSTRAINT fk_patientSSN foreign key (patientSSN) references Patient(patientSSN),
-  CONSTRAINT fk_datePrescribed foreign key (datePrescribed) references Appointment(aptDate),
-  CONSTRAINT uk_drugName UNIQUE (drugName) 
-);
-
 DROP TABLE IF EXISTS Appointment;
 CREATE TABLE Appointment(
   appointmentNo char(10) not null, 
@@ -64,7 +46,6 @@ CREATE TABLE Appointment(
   roomNo int not null,
   
   CONSTRAINT pk_Appointment primary key (appointmentNo),
-  CONSTRAINT fk_TestGiven foreign key (testGiven) references MedicalTest(testID),
   CONSTRAINT fk_DoctorID foreign key (doctorID) references Doctor(doctorID),
   CONSTRAINT fk_PatientSSN foreign key (patientSSN) references Patient(patientSSN),
   CONSTRAINT fk_DoctorName foreign key (doctorName) references Doctor(firstName)
@@ -87,6 +68,24 @@ CREATE TABLE MedicalTest(
   CONSTRAINT fk_DoctorName foreign key (doctorName) references Doctor(firstName)
 );
 
+DROP TABLE IF EXISTS Prescription;
+CREATE TABLE Prescription(
+  prescriptionID char(10) not null, 
+  drugName varchar(25) not null,
+  dosage int not null,
+  noRefills int not null,
+  datePrescribed date not null,
+  mostRecentFiling date,
+  prescribedBy char(10) not null, 
+  patientSSN char(9) not null,
+  
+  CONSTRAINT pk_Prescription primary key (prescriptionID),
+  CONSTRAINT fk_PrescribedBy foreign key (prescribedBy) references Doctor(doctorID),
+  CONSTRAINT fk_patientSSN foreign key (patientSSN) references Patient(patientSSN),
+  CONSTRAINT fk_datePrescribed foreign key (datePrescribed) references Appointment(aptDate),
+  CONSTRAINT uk_drugName UNIQUE (drugName) 
+);
+
 DROP TABLE IF EXISTS Audit;
 CREATE TABLE Audit(
   doctorName varchar(25) not null,
@@ -100,3 +99,13 @@ CREATE TABLE Audit(
   CONSTRAINT fk_Specialty foreign key (specialty) references Doctor(specialty),
   CONSTRAINT fk_DoctorName foreign key (doctorName) references Doctor(firstName)
 );
+
+
+/* inserting into the hospital database */
+INSERT INTO Doctor VALUES
+('2ak1234qwe', 'Tong', 'Johnson', '6261234567', 'neurosurgeon', 230.24),
+('5ak1w34qw4', 'Harden', 'James', '9091234567', 'psychiatry', 399.24),
+('2qqq234qwe', 'James', 'Lebron', '1234567890', 'heart', 124.24),
+('2ak1234lzk', 'Edwards', 'Anthony', '1245873491', 'skin', 222.76),
+('2afdk23452', 'Davis', 'Anthony', '6261234567', 'bone', 799.21)
+;
