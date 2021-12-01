@@ -86,3 +86,19 @@ INSERT INTO Appointment VALUES
     ('AA22171717','00a555555','9090909090','2021-12-01','Yearly Checkup'),
     ('AA22181818','00a555555','1212121212','2021-12-01','Noticable Growth')
     ;
+    
+/*CREATE TABLE MedicalTest(
+	testID char(10) not null,
+	testType varchar(25) not null,
+  
+	CONSTRAINT pk_MedicalTest primary key (testID)
+);*/
+
+INSERT INTO MedicalTest VALUES
+	('000000000a', 'CT Scan'),
+    ('000000000b', 'Blood Test'),
+    ('000000000c', 'Urine Test'),
+    ('000000000d', 'Endoscopy'),
+    ('000000000e', 'Biopsy'),
+    ('000000000f', 'Xray')
+    ;
