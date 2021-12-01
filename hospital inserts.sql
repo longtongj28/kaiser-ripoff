@@ -64,3 +64,25 @@ INSERT INTO Patient VALUES
     ('00a444444','2225488088', '1999-06-19','ik8657wb'),
     ('00a555555','4046852225', '1996-10-30','dd5689dr')
     ;
+
+/*CREATE TABLE Appointment(
+	appointmentNo char(10) not null, 
+	patientID char(9) not null,
+	doctorID char(10) not null,
+	visitDate date,
+	docNote varchar(100),
+  
+	CONSTRAINT pk_Appointment primary key (appointmentNo),
+	CONSTRAINT fk_Appointment_doctorID foreign key (doctorID) references Doctor(doctorID),
+	CONSTRAINT fk_Appointment_patientID foreign key (patientID) references Patient(patientID)
+);*/
+
+INSERT INTO Appointment VALUES
+	('AA22121212','00a265879','1212121212','2021-12-01','Prone to injuries'),
+    ('AA22121212','00a111111','3434343434','2021-12-01','Severe Migrains'),
+    ('AA22121212','00a222222','5656565656','2021-12-01','Yearly Checkup'),
+    ('AA22121212','00a333333','7878787878','2021-12-01','Yearly Checkup'),
+    ('AA22121212','00a444444','7878787878','2021-12-01','Yearly Checkup'),
+    ('AA22121212','00a555555','9090909090','2021-12-01','Yearly Checkup'),
+    ('AA22121212','00a555555','1212121212','2021-12-01','Noticable Growth')
+    ;
