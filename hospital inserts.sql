@@ -126,3 +126,21 @@ INSERT INTO PVisitTest VALUES
     ('AA22181818','000000000f')
 ;
 
+/*CREATE TABLE Prescription(
+	prescriptionID char(10) not null, 
+	drugName varchar(25) not null,
+  
+	CONSTRAINT pk_Prescription primary key (prescriptionID)
+);*/
+
+INSERT INTO Prescription VALUES
+	('1122334455','Levothyroxine'),
+    ('0022334455','Lisinopril'),
+    ('2222334455','Metformin'),
+    ('3322334455','Amlodipine'),
+    ('4422334455','Metoprolol'),
+    ('5522334455','Albuterol'),
+    ('6622334455','Omeprazole'),
+    ('7722334455','Losartan'),
+    ('8822334455','Simvastatin')
+;
