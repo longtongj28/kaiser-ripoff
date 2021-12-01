@@ -102,3 +102,27 @@ INSERT INTO MedicalTest VALUES
     ('000000000e', 'Biopsy'),
     ('000000000f', 'Xray')
     ;
+
+/*CREATE TABLE PVisitTest(
+	appointmentNo char(10) not null,
+	testID char(10) not null,
+
+	CONSTRAINT fk_PVisitTest_appointmentNo foreign key (appointmentNo) references Appointment(appointmentNo),
+	CONSTRAINT fk_PVisitTest_testID foreign key (testID) references MedicalTest(testID)
+);*/
+
+INSERT INTO PVisitTest VALUES
+	('AA22121212','000000000f'),
+    ('AA22131313','000000000a'),
+    ('AA22131313','000000000b'),
+    ('AA22131313','000000000c'),
+    ('AA22141414','000000000e'),
+    ('AA22151515','000000000e'),
+    ('AA22161616','000000000e'),
+    ('AA22171717','000000000e'),
+    ('AA22181818','000000000e'),
+    ('AA22181818','000000000b'),
+    ('AA22181818','000000000e'),
+    ('AA22181818','000000000f')
+;
+
