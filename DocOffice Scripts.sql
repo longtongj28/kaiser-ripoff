@@ -84,7 +84,7 @@ AFTER INSERT
 ON DoctorSpecialty
 FOR EACH ROW
     INSERT INTO Audit (doctorName, auditAction, specialty, dateModified)
-        SELECT p.firstName, 'Update', NEW.specialtyID, NOW()
+        SELECT p.firstName, 'Insert', NEW.specialtyID, NOW()
 		FROM Person p
 		RIGHT JOIN Doctor d
 		ON p.personID = d.personID
