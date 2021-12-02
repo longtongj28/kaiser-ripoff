@@ -92,7 +92,7 @@ FOR EACH ROW
 		ON d.doctorID = ds.doctorID
 		LEFT JOIN Specialty s
 		ON ds.specialtyID = s.specialtyID
-        WHERE NEW.doctorID = ds.doctorID
+        WHERE NEW.doctorID = ds.doctorID AND NEW.specialtyID=ds.specialtyID
 ;
 
 DROP TRIGGER IF EXISTS Trigger_Aud_Specialty_Update;
@@ -109,7 +109,7 @@ FOR EACH ROW
 		ON d.doctorID = ds.doctorID
 		LEFT JOIN Specialty s
 		ON ds.specialtyID = s.specialtyID
-        WHERE NEW.doctorID = ds.doctorID
+        WHERE NEW.doctorID = ds.doctorID AND NEW.specialtyID=ds.specialtyID
 ;
 
 	
