@@ -18,13 +18,14 @@ if(isset($_POST['submit'])) {
     $sql = "INSERT INTO person (PersonID, firstName, lastName, streetName, streetNum, city, zipCode, phoneNumber, SSN) VALUES 
                                 ('$PersonID', '$firstName', '$lastName', '$streetName', '$streetNum', '$city', '$zipCode', '$phoneNum', '$SSN')";
 
-    if(mysqli_query($link, $sql)) {
+    if(mysqli_query($conn, $sql)) {
         echo "IT WORKED";
     }else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($link);
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
 
-    mysqli_close($link);
+    mysqli_close($conn);
+
 }else{
     echo "rip";
 }
