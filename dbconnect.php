@@ -6,8 +6,6 @@ if (!$conn) {
     die('Could not connect: ' . mysqli_error());
 }
 
-echo "Connected Successfully";
-
 $dbName = "DocOffice";
 mysqli_select_db($conn, $dbName) or die("Unable to select database $dbName");
 

@@ -31,9 +31,6 @@
             <label for="phoneNumber">Phone Number: </label>
             <input type="number" id="phoneNumber" name="phoneNumber"><br>
 
-            <label for="personID">Person ID: </label>
-            <input type="text" id="personID" name="personID"><br>
-
             <input type="submit" name="submit" class="button" value="Submit"/>
         </form>
     </div>

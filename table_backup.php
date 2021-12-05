@@ -48,6 +48,8 @@ CREATE TABLE specialty_bak LIKE specialty;
 INSERT INTO specialty_bak SELECT * FROM specialty;
        ";
 
+/** @var $conn */
+
 if(mysqli_multi_query($conn, $sql)){
     echo "IT WORKED";
 }else{
