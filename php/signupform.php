@@ -38,14 +38,14 @@ if(isset($_POST['submit'])) {
 function generatePersonID() {
 
     include 'dbconnect.php';
-    /** @var $conn */
-
+    
     $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
     $randString = '';
     for ($i = 0; $i < 8; $i++) {
         $randString .= $characters[rand(0, strlen($characters))];
     }
-
+    
+    /** @var $conn */
     $temp_id = $randString;
     $result = mysqli_query($conn, "SELECT firstName FROM person WHERE PersonID='$temp_id'");
     if(mysqli_num_rows($result) != 0) {
