@@ -42,7 +42,58 @@
     </div>
     <div>
         <h2>Your medical record</h2>
+        <?php
+
+        $medicalRecordSQL = "SELECT a.appointmentNo, a.visitDate, a.docNote from appointment a WHERE a.patientID='$patientID'";
+        $medicalRecordResult = mysqli_query($conn, $medicalRecordSQL);
+
+        print "<pre>";
+        print "<table border=1>";
+        print "<tr><td> Appointment Number </td><td> Visit Date </td><td> Doctor's Note </td> </td>";
+        while($row = mysqli_fetch_array($medicalRecordResult, MYSQLI_BOTH))
+        {
+            print "\n";
+            print "<tr><td>$row[appointmentNo] </td><td> $row[visitDate] </td><td> $row[docNote] </td></tr>	";
+        }
+        print "</table>";
+        print "</pre>";
+
+        ?>
     </div>
+    <!-- <div>
+        <h2>Add a family member</h2>
+        <form action="appointment.php" method="post">
+            <label for="firstName">First Name: </label>
+            <input type="text" id="firstName" name="firstName"><br>
+
+            <label for="lastName">Last Name: </label>
+            <input type="text" id="lastName" name="lastName"><br>
+
+            <label for="SSN">SSN: </label>
+            <input type="number" id="SSN" name="SSN"><br>
+
+            <label for="streetName">Street Name: </label>
+            <input type="text" id="streetName" name="streetName"><br>
+
+            <label for="streetNum">Street Number: </label>
+            <input type="number" id="streetNum" name="streetNum"><br>
+
+            <label for="city">City: </label>
+            <input type="text" id="city" name="city"><br>
+
+            <label for="zipCode">Zip Code: </label>
+            <input type="number" id="zipCode" name="zipCode"><br>
+
+            <label for="phoneNumber">Phone Number: </label>
+            <input type="number" id="phoneNumber" name="phoneNumber"><br>
+
+            <input type="submit" name="submit" class="button" value="Submit"/>
+        </form>
+    </div>
+    <div>
+        <h2>Find doctors near you</h2>
+    </div>
+     -->
     <!-- <div>
         <a>Book an Appointment</a>
         <a>Add a family member</a>
