@@ -28,6 +28,9 @@
             <label for="zipCode">Zip Code: </label>
             <input type="number" id="zipCode" name="zipCode"><br>
 
+            <label for="DOB">Date of Birth: </label>
+            <input type="date" id="DOB" name="DOB"><br>
+
             <label for="phoneNumber">Phone Number: </label>
             <input type="number" id="phoneNumber" name="phoneNumber"><br>
 

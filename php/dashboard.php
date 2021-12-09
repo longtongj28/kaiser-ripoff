@@ -17,10 +17,13 @@
 
     $queryPatientID = mysqli_query($conn, "SELECT patientID FROM patient WHERE personID='$PersonID'");
     $patientInfo = mysqli_fetch_row($queryPatientID);
-    $patientID = $patientInfo[0];
+    if ($patientInfo) {
+        $patientID = $patientInfo[0];
+    }
 
     $firstName = $userInfo[1];
     $lastName = $userInfo[2];
+    $city = $userInfo[5];
     $ssn = $userInfo[8];
     ?>
 
@@ -43,63 +46,47 @@
     <div>
         <h2>Your medical record</h2>
         <?php
+        if ($patientInfo) {
 
-        $medicalRecordSQL = "SELECT a.appointmentNo, a.visitDate, a.docNote from appointment a WHERE a.patientID='$patientID'";
-        $medicalRecordResult = mysqli_query($conn, $medicalRecordSQL);
+            $medicalRecordSQL = "SELECT a.appointmentNo, a.visitDate, a.docNote from appointment a WHERE a.patientID='$patientID'";
+            $medicalRecordResult = mysqli_query($conn, $medicalRecordSQL);
 
-        print "<pre>";
-        print "<table border=1>";
-        print "<tr><td> Appointment Number </td><td> Visit Date </td><td> Doctor's Note </td> </td>";
-        while($row = mysqli_fetch_array($medicalRecordResult, MYSQLI_BOTH))
-        {
-            print "\n";
-            print "<tr><td>$row[appointmentNo] </td><td> $row[visitDate] </td><td> $row[docNote] </td></tr>	";
+            print "<pre>";
+            print "<table border=1>";
+            print "<tr><td> Appointment Number </td><td> Visit Date </td><td> Doctor's Note </td> </td>";
+            while($row = mysqli_fetch_array($medicalRecordResult, MYSQLI_BOTH))
+            {
+                print "\n";
+                print "<tr><td>$row[appointmentNo] </td><td> $row[visitDate] </td><td> $row[docNote] </td></tr>	";
+            }
+            print "</table>";
+            print "</pre>";
         }
-        print "</table>";
-        print "</pre>";
-
         ?>
     </div>
-    <!-- <div>
-        <h2>Add a family member</h2>
-        <form action="appointment.php" method="post">
-            <label for="firstName">First Name: </label>
-            <input type="text" id="firstName" name="firstName"><br>
-
-            <label for="lastName">Last Name: </label>
-            <input type="text" id="lastName" name="lastName"><br>
-
-            <label for="SSN">SSN: </label>
-            <input type="number" id="SSN" name="SSN"><br>
-
-            <label for="streetName">Street Name: </label>
-            <input type="text" id="streetName" name="streetName"><br>
-
-            <label for="streetNum">Street Number: </label>
-            <input type="number" id="streetNum" name="streetNum"><br>
-
-            <label for="city">City: </label>
-            <input type="text" id="city" name="city"><br>
-
-            <label for="zipCode">Zip Code: </label>
-            <input type="number" id="zipCode" name="zipCode"><br>
-
-            <label for="phoneNumber">Phone Number: </label>
-            <input type="number" id="phoneNumber" name="phoneNumber"><br>
-
-            <input type="submit" name="submit" class="button" value="Submit"/>
-        </form>
-    </div>
     <div>
-        <h2>Find doctors near you</h2>
+        <h2>Doctors in your area</h2>
+        <?php
+             if ($patientInfo) {
+                $getNearestSQL = "
+                SELECT firstName, lastName, city from 
+                (SELECT Doctor.personID, firstName, lastName, city FROM 
+                Person inner join Doctor
+                on Person.PersonID = Doctor.personID AND Doctor.personID != '$PersonID') doctors where doctors.city LIKE '$city';
+                ";
+                $result = mysqli_query($conn, $getNearestSQL);
+
+                print "<table border=1>";
+                print "<tr><td> First Name </td><td> Last Name </td><td> City </td> </td>";
+                while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+                {
+                    print "\n";
+                    print "<tr><td>$row[firstName] </td><td> $row[lastName] </td><td> $row[city] </td></tr>	";
+                }
+                print "</table>";
+             }
+        ?>
     </div>
-     -->
-    <!-- <div>
-        <a>Book an Appointment</a>
-        <a>Add a family member</a>
-        <a>Find doctors near you</a>
-        <a>Your medical record</a>
-    </div> -->
     <div>
         <h2>Prescriptions History</h2>
         <?php include 'getAvailablePrescriptions.php'?>
