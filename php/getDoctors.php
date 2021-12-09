@@ -4,7 +4,7 @@
 include 'dbconnect.php';
 $sql="
 SELECT firstName, lastName, Doctor.doctorID FROM
-Doctor LEFT JOIN Person
+Doctor INNER JOIN Person
 ON Doctor.personID = Person.personID AND Doctor.personID != '$PersonID';
 "; 
 
@@ -16,12 +16,10 @@ $result = mysqli_query($conn,$sql);
 
 while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
 {
-    if ($row['firstName'] || $row['lastName']) {
-        echo "\n";
-        echo "<option value=$row[doctorID]>
-                $row[firstName] $row[lastName]
-              </option>"; 
-    }
+    echo "\n";
+    echo "<option value=$row[doctorID]>
+            $row[firstName] $row[lastName]
+            </option>"; 
 }
 
 echo "</select>";// Closing of list box

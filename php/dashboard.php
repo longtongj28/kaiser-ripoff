@@ -40,48 +40,19 @@
             <input type="submit" name="bookAptSubmit"/>
         </form>
     </div>
-    <!-- <div>
-        <h2>Add a family member</h2>
-        <form action="appointment.php" method="post">
-            <label for="firstName">First Name: </label>
-            <input type="text" id="firstName" name="firstName"><br>
-
-            <label for="lastName">Last Name: </label>
-            <input type="text" id="lastName" name="lastName"><br>
-
-            <label for="SSN">SSN: </label>
-            <input type="number" id="SSN" name="SSN"><br>
-
-            <label for="streetName">Street Name: </label>
-            <input type="text" id="streetName" name="streetName"><br>
-
-            <label for="streetNum">Street Number: </label>
-            <input type="number" id="streetNum" name="streetNum"><br>
-
-            <label for="city">City: </label>
-            <input type="text" id="city" name="city"><br>
-
-            <label for="zipCode">Zip Code: </label>
-            <input type="number" id="zipCode" name="zipCode"><br>
-
-            <label for="phoneNumber">Phone Number: </label>
-            <input type="number" id="phoneNumber" name="phoneNumber"><br>
-
-            <input type="submit" name="submit" class="button" value="Submit"/>
-        </form>
-    </div>
-    <div>
-        <h2>Find doctors near you</h2>
-    </div>
     <div>
         <h2>Your medical record</h2>
-    </div> -->
+    </div>
     <!-- <div>
         <a>Book an Appointment</a>
         <a>Add a family member</a>
         <a>Find doctors near you</a>
         <a>Your medical record</a>
     </div> -->
+    <div>
+        <h2>Prescriptions History</h2>
+        <?php include 'getAvailablePrescriptions.php'?>
+    </div>
 </div>
 </body>
 </html>
