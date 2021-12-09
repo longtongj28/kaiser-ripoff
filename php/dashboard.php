@@ -40,6 +40,26 @@
             <input type="submit" name="bookAptSubmit"/>
         </form>
     </div>
+    <div>
+        <h2>Your medical record</h2>
+        <?php
+
+        $medicalRecordSQL = "SELECT a.appointmentNo, a.visitDate, a.docNote from appointment a WHERE a.patientID='$patientID'";
+        $medicalRecordResult = mysqli_query($conn, $medicalRecordSQL);
+
+        print "<pre>";
+        print "<table border=1>";
+        print "<tr><td> Appointment Number </td><td> Visit Date </td><td> Doctor's Note </td> </td>";
+        while($row = mysqli_fetch_array($medicalRecordResult, MYSQLI_BOTH))
+        {
+            print "\n";
+            print "<tr><td>$row[appointmentNo] </td><td> $row[visitDate] </td><td> $row[docNote] </td></tr>	";
+        }
+        print "</table>";
+        print "</pre>";
+
+        ?>
+    </div>
     <!-- <div>
         <h2>Add a family member</h2>
         <form action="appointment.php" method="post">
@@ -73,9 +93,7 @@
     <div>
         <h2>Find doctors near you</h2>
     </div>
-    <div>
-        <h2>Your medical record</h2>
-    </div> -->
+     -->
     <!-- <div>
         <a>Book an Appointment</a>
         <a>Add a family member</a>
