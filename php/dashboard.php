@@ -46,22 +46,26 @@
     <div>
         <h2>Your medical record</h2>
         <?php
-        if ($patientInfo) {
 
-            $medicalRecordSQL = "SELECT a.appointmentNo, a.visitDate, a.docNote from appointment a WHERE a.patientID='$patientID'";
-            $medicalRecordResult = mysqli_query($conn, $medicalRecordSQL);
+        $medicalRecordSQL = "SELECT a.appointmentNo, a.visitDate, p.firstName,  p.lastName, a.docNote
+                                from appointment a
+                                LEFT JOIN doctor d
+                                ON a.doctorID = d.doctorID
+                                LEFT JOIN person p
+                                ON d.personID = p.PersonID WHERE a.patientID='$patientID'";
+        $medicalRecordResult = mysqli_query($conn, $medicalRecordSQL);
 
-            print "<pre>";
-            print "<table border=1>";
-            print "<tr><td> Appointment Number </td><td> Visit Date </td><td> Doctor's Note </td> </td>";
-            while($row = mysqli_fetch_array($medicalRecordResult, MYSQLI_BOTH))
-            {
-                print "\n";
-                print "<tr><td>$row[appointmentNo] </td><td> $row[visitDate] </td><td> $row[docNote] </td></tr>	";
-            }
-            print "</table>";
-            print "</pre>";
+        print "<pre>";
+        print "<table border=1>";
+        print "<tr><td> Appointment Number </td><td> Visit Date </td><td> Doctor </td><td> Doctor's Note </td> </td>";
+        while($row = mysqli_fetch_array($medicalRecordResult, MYSQLI_BOTH))
+        {
+            print "\n";
+            print "<tr><td>$row[appointmentNo] </td><td> $row[visitDate] </td><td> $row[firstName] $row[lastName] </td><td> $row[docNote] </td></tr>	";
         }
+        print "</table>";
+        print "</pre>";
+
         ?>
     </div>
     <div>

@@ -16,16 +16,21 @@ if(isset($_POST['submit'])) {
     $phoneNum = $_POST['phoneNumber'];
     $SSN = $_POST['SSN'];
     $DOB = $_POST['DOB'];
-    $PersonID = generateID(8);
-    $patientID = generateID(9);
+    $PersonID = generatePersonID();
+    $PatientID = generatePatientID();
 
     $sql = "INSERT INTO person (PersonID, firstName, lastName, streetName, streetNum, city, zipCode, phoneNumber, SSN) VALUES 
                                 ('$PersonID', '$firstName', '$lastName', '$streetName', '$streetNum', '$city', '$zipCode', '$phoneNum', '$SSN')";
-    $createPatientSQL = "INSERT INTO patient (patientID, phoneNumber, DOB, personID) VALUES
-                        ('$patientID', '$phoneNum', '$DOB', '$PersonID')
-    ";
+    $patientSQL = "INSERT INTO patient (patientID, phoneNumber, DOB, personID) VALUES ('$PatientID','$phoneNum', '$DOB', '$PersonID')";
 
-    if(mysqli_query($conn, $sql) && mysqli_query($conn, $createPatientSQL)) {
+
+    if(mysqli_query($conn, $sql)) {
+
+    }else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+
+    if(mysqli_query($conn, $patientSQL)) {
 
     }else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
@@ -40,21 +45,41 @@ if(isset($_POST['submit'])) {
     echo "rip <br>";
 }
 
-function generateID($num) {
+function generatePersonID() {
 
     include 'dbconnect.php';
     
     $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
     $randString = '';
-    for ($i = 0; $i < $num; $i++) {
-        $randString .= $characters[rand(0, strlen($characters))];
+    for ($i = 0; $i < 8; $i++) {
+        $randString .= $characters[rand(0, strlen($characters) - 1)];
     }
     
     /** @var $conn */
     $temp_id = $randString;
     $result = mysqli_query($conn, "SELECT firstName FROM person WHERE PersonID='$temp_id'");
     if(mysqli_num_rows($result) != 0) {
-        generateID(10);
+        generatePersonID();
+    }
+
+    return $randString;
+}
+
+function generatePatientID() {
+
+    include 'dbconnect.php';
+
+    $characters = '0123456789';
+    $randString = '00a';
+    for ($i = 0; $i < 6; $i++) {
+        $randString .= $characters[rand(0, strlen($characters) - 1)];
+    }
+
+    /** @var $conn */
+    $temp_id = $randString;
+    $result = mysqli_query($conn, "SELECT firstName FROM person WHERE PersonID='$temp_id'");
+    if(mysqli_num_rows($result) != 0) {
+        generatePatientID();
     }
 
     return $randString;

@@ -29,7 +29,7 @@ function generateID(int $num) {
     $characters = str_split('0123456789abcdefghijklmnopqrstuvwxyz');
     $randString = ''; 
     for ($i = 0; $i < $num; $i++) {
-        $randString .= $characters[rand(0, count($characters))];
+        $randString .= $characters[rand(0, count($characters) - 1)];
     }
     
     return $randString;
